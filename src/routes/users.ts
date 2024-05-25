@@ -15,6 +15,7 @@ router.post(
     }),
   ],
   async (req: Request, res: Response) => {
+    // console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
@@ -39,7 +40,7 @@ router.post(
         secure: process.env.NODE_ENV === "production",
         maxAge: 86400000, // equale one day
       });
-      return res.sendStatus(200);
+      return res.status(200).send({ message: "User registred Ok" });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Something went wrong" });
